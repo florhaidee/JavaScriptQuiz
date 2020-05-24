@@ -8,6 +8,16 @@
     --grey: #333;
     font-size: 80%;
 }
+body {
+    background: #ededed;
+    color: var(--grey);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 /*HEADER STYLE START*/
 header {
     background: var(--secondary);
@@ -18,6 +28,70 @@ header h1{
     color: var(--primary);
     margin: 5px 0;
     font-size: 3rem;
+}
+/* MAIN STYLE START*/
+.page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5px;
+}
+/* TOP-BAR STYLE START*/
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+/*QUIZ SECTION STYLE START*/
+.quiz-section {
+    flex: 1;
+    display: flex;    
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+}
+.quiz-title {
+    color: black;
+    justify-content: center;
+    font-size: 2.6rem;
+    margin: 0px;
+}
+.quiz-content {
+    display: flex;   
+    flex-direction: column;
+    font-size: 1.2rem;
+    margin: 25px 0;
+}
+.quiz-content p {
+    margin: 0px;
+    justify-content: center;
+    display: flex;
+}
+/*BUTTON STYLE START*/
+.btn {
+    outline: none;
+    border: none;
+    display: inline-block;
+    padding: 10px 15px;
+    background: var(--primary);
+    font-size: 2.2rem;
+    border-radius: 12px;
+    position: relative;
+    top: -3px;
+    box-shadow: 0 3px var(--grey);
+} 
+.btn:hover {
+    box-shadow: 0 2px var(--grey);
+    top: -2px;
+}
+.btn:active {
+    box-shadow: 0 0px var(--grey);
+    top: 0;
 }
 /*FOOTER STYLE START*/
 footer {
