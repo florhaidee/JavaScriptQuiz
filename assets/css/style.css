@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}  
+:root {
+    --primary: #0cd8f3f1;
+    --secondary: #4d7a81e8;
+    --tertiary: rgb(112, 201, 212);
+    --grey: #333;
+    font-size: 80%;
+}
+/*HEADER STYLE START*/
+header {
+    background: var(--secondary);
+    padding: 30px 25px;
+    border-bottom: 5px solid var(--primary);
+}
+header h1{
+    color: var(--primary);
+    margin: 5px 0;
+    font-size: 3rem;
+}
+/*FOOTER STYLE START*/
+footer {
+    width: 100%;
+    background: var(--secondary);
+    color: var(--primary);
+    font-size: 1.4rem;
+    padding: 20px;
+    border-top: 5px solid var(--primary);
+}
