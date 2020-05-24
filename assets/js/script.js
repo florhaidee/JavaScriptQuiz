@@ -9,7 +9,7 @@ var timeLeft = 75;
 var questionsArray = [
     {
         q: "question",
-        a: "answer",
+        a: "2",
         choices: [
             "choice 1",
             "choice 2",
@@ -19,7 +19,7 @@ var questionsArray = [
     },
     {
         q: "question",
-        a: "answer",
+        a: "1",
         choices: [
             "choice 1",
             "choice 2",
@@ -29,7 +29,7 @@ var questionsArray = [
     },
     {
         q: "question",
-        a: "answer",
+        a: "3",
         choices: [
             "choice 1",
             "choice 2",
@@ -39,7 +39,7 @@ var questionsArray = [
     },
     {
         q: "question",
-        a: "answer",
+        a: "2",
         choices: [
             "choice 1",
             "choice 2",
@@ -49,7 +49,7 @@ var questionsArray = [
     },
     {
         q: "question",
-        a: "answer",
+        a: "0",
         choices: [
             "choice 1",
             "choice 2",
@@ -58,6 +58,10 @@ var questionsArray = [
         ], 
     },
 ]
+//function to see if the choice selected by user was the correct answer.
+/*var correctAnswer = function(){
+    if (questionsArray[0].a === )
+}*/
 var timer = function(){
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
@@ -77,11 +81,21 @@ var showAnswerChoices = function(){
         var answersChoicesList = document.createElement("li");
         answersChoicesList.className = "answers-list";
         var answersChoicesInfo = document.createElement("div");
-        answersChoicesInfo.innerHTML = "<button class='btn' id='start-quiz' type='button'>" + questionsArray[0].choices[i] + "</button>";
+        answersChoicesInfo.innerHTML = "<button class='btn' id= " + i + " type='button'>" + questionsArray[0].choices[i] + "</button>";
         answersChoicesList.appendChild(answersChoicesInfo);
         console.log(answersChoicesList);
         answerChoicesEl.appendChild(answersChoicesList);
+    } 
+}
+var choiceSelected = function(event){
+    var choice = event.target.id;
+    if (choice === questionsArray[0].a){
+        return true;
     }
+    else {
+        timeLeft -=10;
+        return false;
+    }  
 }
 var deleteSection = function(){
     var text = document.querySelector(".text");
@@ -95,3 +109,4 @@ var startQuiz = function(){
     showAnswerChoices();
 }
 startQuizEl.addEventListener("click", startQuiz);
+answerChoicesEl.addEventListener("click", choiceSelected);
