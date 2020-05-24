@@ -72,6 +72,10 @@ header h1{
     justify-content: center;
     display: flex;
 }
+.answers-list{
+    list-style: none;
+    padding: 5px;
+}
 /*BUTTON STYLE START*/
 .btn {
     outline: none;
@@ -88,6 +92,7 @@ header h1{
 .btn:hover {
     box-shadow: 0 2px var(--grey);
     top: -2px;
+    background: var(--tertiary);
 }
 .btn:active {
     box-shadow: 0 0px var(--grey);
