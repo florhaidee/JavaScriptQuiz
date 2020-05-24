@@ -1,10 +1,11 @@
 var pageContentEl = document.querySelector("#page-content");
 var startQuizEl = document.querySelector("#start-quiz");
 var questionEl = document.querySelector("#quiz-title");
-console.log(questionEl);
+var timerEl = document.querySelector("#timer");
 var answerChoicesEl = document.querySelector("#answers-choices");
 console.log(answerChoicesEl);
 var answersEl = document.querySelector("#answer");
+var timeLeft = 75;
 var questionsArray = [
     {
         q: "question",
@@ -57,6 +58,17 @@ var questionsArray = [
         ], 
     },
 ]
+var timer = function(){
+    var timeInterval = setInterval(function () {
+        timerEl.textContent = "Time: " + timeLeft;
+        timeLeft--;  
+        if (timeLeft === 0) {
+          timerEl.textContent = "Time: 0";
+          // Game-over function;
+          clearInterval(timeInterval);
+        }   
+    }, 1000);
+}
 var showQuestion = function(){
     questionEl.innerHTML = questionsArray[0].q;
 }
@@ -77,6 +89,7 @@ var deleteSection = function(){
     startQuizEl.remove();
 }
 var startQuiz = function(){
+    timer();
     deleteSection();
     showQuestion();
     showAnswerChoices();
