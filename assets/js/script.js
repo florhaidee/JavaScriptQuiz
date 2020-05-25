@@ -3,7 +3,7 @@ var startQuizEl = document.querySelector("#start-quiz");
 var questionEl = document.querySelector("#quiz-title");
 var timerEl = document.querySelector("#timer");
 var answerChoicesEl = document.querySelector("#answers-choices");
-console.log(answerChoicesEl);
+var sectionEl = document.querySelector("#quiz-content");
 var answerEl = document.querySelector("#container");
 var timeLeft = 75;
 var index = 0;
@@ -59,15 +59,39 @@ var questionsArray = [
         ], 
     },
 ]
+var createForm = function(){
+    var containerEl = document.createElement("div");
+    containerEl.className = "form";
+    var labelEl = document.createElement("div");
+    labelEl.innerHTML = "<label for='initials'>Enter Initials:</label>";
+    labelEl.className = "form-label";
+    var inputContainerEl = document.createElement("div");
+    inputContainerEl.innerHTML = "<input type='text' id='initials' name='initials' class='form'/>";
+    inputContainerEl.className = "form-input";
+    var btnEl = document.createElement("div");
+    btnEl.innerHTML =  "<button class='btn form-label' id='submit' type='submit'>Submit</button>";
+    containerEl.appendChild(labelEl);
+    containerEl.appendChild(inputContainerEl);
+    containerEl.appendChild(btnEl);
+    sectionEl.appendChild(containerEl);
+}
+var gameOver = function(){
+    answerChoicesEl.remove();
+    questionEl.textContent = "All done!"
+    var subTitle = document.createElement("h3");
+    subTitle.textContent = "Your final Score is " + timeLeft;
+    sectionEl.appendChild(subTitle);
+    createForm();
+}
 var timer = function(){
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
-        timeLeft--;  
         if (timeLeft === 0) {
           timerEl.textContent = "Time: 0";
-          // Game-over function;
+          gameOver();
           clearInterval(timeInterval);
-        }   
+        }  
+        timeLeft--;   
     }, 1000);
 }
 var deleteFirstPage = function(){
@@ -96,7 +120,7 @@ var showQuestion = function(){
             answerChoicesEl.appendChild(answersChoicesList);
         } 
     }else{
-        alert("game -over");
+        gameOver();
     }
     index++;
 }
@@ -113,7 +137,8 @@ var startQuiz = function(){
 var readAnswers = function(event){
     var choice = event.target.id;
     if(index === 5){
-        alert("Your Score is: " + timeLeft);  
+        alert("Your Score is: " + timeLeft); 
+        gameOver(); 
     } else if (choice === questionsArray[index].a){
             deleteSection();
             showQuestion();

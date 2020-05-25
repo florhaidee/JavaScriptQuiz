@@ -76,6 +76,18 @@ header h1{
     list-style: none;
     padding: 5px;
 }
+/*FORM STYLE*/
+.form, .form-label, .form-input{
+    display: flex;
+}
+.form-label, .form-input {
+    padding: 5px;
+    font-size: 1.5em;
+    justify-content: center;
+}
+.form-label {
+    align-self: center;
+}
 /*BUTTON STYLE START*/
 .btn {
     outline: none;
