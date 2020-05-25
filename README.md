@@ -5,13 +5,18 @@ A timed quiz on JavaScript fundamentals that stores high scores
 
 ## Features
 * On the main page is the explanation of the quiz and a button to "Start Quiz".
- <img src="../assets/images/Screenshot-Main-Page.png"/>
+
+ <img src="assets/images/Screenshot-Main-Page.PNG"/>
+
 * Time start at 75 
 * Is gonna display a question and 4 choices to select
-![display question and choices](./assets/images/screenshot-choices.png)
+
+![display question and choices](./assets/images/screenshot-choices.PNG)
+
 * After click on one of the choices is gonna move to the next question and is gonna present on the bottom of the page if was a correct or wrong answer.
 * For every wrong answer the time/score is gonna be subtracted by ten.
-<img src="/assets/images/screenshot-JavaScript-Quiz.png" width="100"/>
+
+<img src="/assets/images/screenshot-JavaScript-Quiz.PNG"/>
 
 ## Built With
 * HTML
