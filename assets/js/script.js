@@ -86,9 +86,8 @@ var gameOver = function(){
 var timer = function(){
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
-        if (timeLeft === 0) {
+        if (timeLeft === 0 || index === 5) {
           timerEl.textContent = "Time: 0";
-          gameOver();
           clearInterval(timeInterval);
         }  
         timeLeft--;   
@@ -136,8 +135,12 @@ var startQuiz = function(){
 }
 var readAnswers = function(event){
     var choice = event.target.id;
+    if (timeLeft === 0){
+        gameOver();
+        timerEl.textContent = "Time: 0";
+    }
     if(index === 5){
-        alert("Your Score is: " + timeLeft); 
+        timerEl.textContent = "Time: "+ timeLeft; 
         gameOver(); 
     } else if (choice === questionsArray[index].a){
             deleteSection();
