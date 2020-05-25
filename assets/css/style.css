@@ -53,7 +53,7 @@ header h1{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 5px auto;
+    margin: 5px;
 }
 .quiz-title {
     color: black;
@@ -97,6 +97,12 @@ header h1{
 .btn:active {
     box-shadow: 0 0px var(--grey);
     top: 0;
+}
+/*CONTAINER STYLE START*/
+.container{
+    display: flex;
+    width: 80%;
+    justify-content: center;
 }
 /*FOOTER STYLE START*/
 footer {
