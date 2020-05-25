@@ -72,7 +72,7 @@ header h1{
     justify-content: center;
     display: flex;
 }
-.answers-list{
+.answers-list, .list-elemt {
     list-style: none;
     padding: 5px;
 }

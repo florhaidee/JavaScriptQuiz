@@ -4,11 +4,12 @@ var questionEl = document.querySelector("#quiz-title");
 var timerEl = document.querySelector("#timer");
 var answerChoicesEl = document.querySelector("#answers-choices");
 console.log(answerChoicesEl);
-var answersEl = document.querySelector("#answer");
+var answerEl = document.querySelector("#container");
 var timeLeft = 75;
+var index = 0;
 var questionsArray = [
     {
-        q: "question",
+        q: "question1",
         a: "2",
         choices: [
             "choice 1",
@@ -18,7 +19,7 @@ var questionsArray = [
         ],      
     },
     {
-        q: "question",
+        q: "question2",
         a: "1",
         choices: [
             "choice 1",
@@ -28,7 +29,7 @@ var questionsArray = [
         ], 
     },
     {
-        q: "question",
+        q: "question3",
         a: "3",
         choices: [
             "choice 1",
@@ -38,7 +39,7 @@ var questionsArray = [
         ], 
     },
     {
-        q: "question",
+        q: "question4",
         a: "2",
         choices: [
             "choice 1",
@@ -48,7 +49,7 @@ var questionsArray = [
         ], 
     },
     {
-        q: "question",
+        q: "question5",
         a: "0",
         choices: [
             "choice 1",
@@ -58,10 +59,6 @@ var questionsArray = [
         ], 
     },
 ]
-//function to see if the choice selected by user was the correct answer.
-/*var correctAnswer = function(){
-    if (questionsArray[0].a === )
-}*/
 var timer = function(){
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
@@ -74,39 +71,53 @@ var timer = function(){
     }, 1000);
 }
 var showQuestion = function(){
-    questionEl.innerHTML = questionsArray[0].q;
-}
-var showAnswerChoices = function(){
-    for(var i=0; i< questionsArray[0].choices.length; i++){
-        var answersChoicesList = document.createElement("li");
-        answersChoicesList.className = "answers-list";
-        var answersChoicesInfo = document.createElement("div");
-        answersChoicesInfo.innerHTML = "<button class='btn' id= " + i + " type='button'>" + questionsArray[0].choices[i] + "</button>";
-        answersChoicesList.appendChild(answersChoicesInfo);
-        console.log(answersChoicesList);
-        answerChoicesEl.appendChild(answersChoicesList);
-    } 
-}
-var choiceSelected = function(event){
-    var choice = event.target.id;
-    if (choice === questionsArray[0].a){
-        return true;
+    console.log(index);
+    if (timeLeft > 0){
+        questionEl.innerHTML =questionsArray[index].q;
+        for(var i=0; i< questionsArray[index].choices.length; i++){
+            var answersChoicesList = document.createElement("li");
+            answersChoicesList.className = "list-elemt";
+            var answersChoicesInfo = document.createElement("div");
+            answersChoicesInfo.innerHTML = "<button class='btn' id= " + i + " type='button'>" + questionsArray[index].choices[i] + "</button>";
+            answersChoicesList.appendChild(answersChoicesInfo);
+            console.log(answersChoicesList);
+            answerChoicesEl.appendChild(answersChoicesList);
+        } 
+    }else{
+        alert("game -over");
     }
-    else {
-        timeLeft -=10;
-        return false;
-    }  
+    index++;
+}
+var deleteFirstPage = function(){
+    var text = document.querySelector(".text");
+    text.remove(); 
+    var btn = document.querySelector(".btn");
+    btn.remove();  
 }
 var deleteSection = function(){
-    var text = document.querySelector(".text");
-    text.remove();   
-    startQuizEl.remove();
+    for (var i=0; i< questionsArray[index].choices.length; i++){
+        var listElem = document.querySelector(".list-elemt");
+        listElem.remove();
+    }
 }
 var startQuiz = function(){
+    index = 0;
     timer();
-    deleteSection();
+    deleteFirstPage();
     showQuestion();
-    showAnswerChoices();
+}
+var readAnswers = function(event){
+    var choice = event.target.id;
+    if(index === 5){
+        alert("Your Score is: " + timeLeft);  
+    } else if (choice === questionsArray[index].a){
+            deleteSection();
+            showQuestion();
+        } else {
+            timeLeft -=10;
+            deleteSection();
+            showQuestion();
+        };   
 }
 startQuizEl.addEventListener("click", startQuiz);
-answerChoicesEl.addEventListener("click", choiceSelected);
+answerChoicesEl.addEventListener("click", readAnswers);
