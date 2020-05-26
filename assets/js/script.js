@@ -88,7 +88,7 @@ var gameOver = function(){
 var timer = function(){
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
-        if (timeLeft === 0 || index >= 4) {
+        if (timeLeft === 0 || index > 4) {
           clearInterval(timeInterval);
         }  
         timeLeft--;   
@@ -108,7 +108,7 @@ var deleteSection = function(){
 }
 var showQuestion = function(){
     console.log("index:",index);
-    if (timeLeft > 0){
+    if (timeLeft > 0 && index < 5){
         questionEl.innerHTML =questionsArray[index].q;
         for(var i=0; i < questionsArray[index].choices.length; i++){
             var answersChoicesList = document.createElement("li");
@@ -119,7 +119,6 @@ var showQuestion = function(){
             console.log("array choices:",i);
             answerChoicesEl.appendChild(answersChoicesList);
         } 
-        answerChoicesEl.addEventListener("click", readAnswers);
     }else{
         gameOver();
     }  
@@ -139,34 +138,37 @@ var readAnswers = function(event){
     if (timeLeft === 0){
         gameOver();
         timerEl.textContent = "Time: 0";
-    }else if (index >= 4){
+    }else if (index >= 5){
         timerEl.textContent = "Time: "+ timeLeft; 
         gameOver(); 
     } else if (choice === questionsArray[index].a){
         console.log(choice , questionsArray[index].a);
         deleteSection();
+        console.log("Correct!", questionsArray[index].q);
+        console.log('answer', questionsArray[index].a);
+        console.log('event.target' , choice);
+        index++;
         showQuestion();
         displayAnswer("Correct!");
-        console.log("Correct!", questionsArray[index].q);
-        console.log('event.target' , choice);
-        console.log('answer', questionsArray[index].a);
     } else {
+        timeLeft -=10;
         deleteSection();
+        console.log("Wrong!", questionsArray[index].q);
+        console.log('answer', questionsArray[index].a);
+        console.log('event.target' , choice);
+        index++;
         showQuestion();
         displayAnswer("Wrong!");
-        timeLeft -=10;
-        console.log("Wrong!", questionsArray[index].q);
-        console.log('event.target' , choice);
-        console.log('answer', questionsArray[index].a);
+        
     };   
-    index++;
 }
 var createScoreArray = function(st,num){
     var scoreList = document.createElement('ul');
     scoreList.className = "answers-list";
     var scoreElem = document.createElement('li');
     scoreElem.className = "list-elemt";
-    scoreElem.innerHTML = "<h3> Initials =" + st + "; Score" + num + "</h3>";
+    num++;
+    scoreElem.innerHTML = "<h3> Initials =" + st + "; Score " + num + "</h3>";
     scoreList.appendChild(scoreElem);
     sectionEl.appendChild(scoreList);
 }
@@ -188,9 +190,7 @@ var showScores = function(st,num){
 }
 var viewScores = function(event){
     event.preventDefault();
-    console.dir(event.target);
     var initialsInput = document.querySelector("input[name='initials']").value;
-    console.log(initialsInput);
     if(!initialsInput){
         alert("You need to write your initials!");
         return false;
@@ -200,7 +200,7 @@ var viewScores = function(event){
     } else {
         var auxObj = {
            initials: initialsInput,
-           score: timeLeft,  
+           score: timeLeft + 1,  
         };
         console.log(auxObj);
         scoreArray.push(auxObj);
@@ -209,6 +209,6 @@ var viewScores = function(event){
     }
 }
 startQuizEl.addEventListener("click", startQuiz);
-//answerChoicesEl.addEventListener("click", readAnswers);
+answerChoicesEl.addEventListener("click", readAnswers);
 sectionEl.addEventListener("submit", viewScores);
 scoreEl.addEventListener("click",viewScores);
