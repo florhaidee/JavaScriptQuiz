@@ -10,53 +10,53 @@ var timeLeft = 75;
 var index = 0;
 var questionsArray = [
     {
-        q: "question1",
+        q: "Javascript has a list of reserved words, which cannot be used as variable names, wich of the following are NOT a reserved word:",
         a: "2",
         choices: [
-            "choice 1",
-            "choice 2",
-            "choice 3",
-            "choice 4" 
+            "let",
+            "class",
+            "menu",
+            "return" 
         ],      
     },
     {
-        q: "question2",
+        q: "Wich of the folowwing group of data types are correct",
         a: "1",
         choices: [
-            "choice 1",
-            "choice 2",
-            "choice 3",
-            "choice 4"
+            "number, string, null, math",
+            "number, string, null, object",
+            "null, math, string, object",
+            "symbol, undefined, string, text"
         ], 
     },
     {
-        q: "question3",
+        q: "What is the result of the following code: var apple = '2' , var x = '3'; alert( apple + x );",
         a: "3",
         choices: [
-            "choice 1",
-            "choice 2",
-            "choice 3",
-            "choice 4" 
+            "applex",
+            "5",
+            "apple+x",
+            "'23'" 
         ], 
     },
     {
-        q: "question4",
+        q: "There are three logical operators in JavaScript, which of the following choices is NOT a logical operator",
         a: "2",
         choices: [
-            "choice 1",
-            "choice 2",
-            "choice 3",
-            "choice 4" 
+            "&&",
+            "/",
+            "!",
+            "||" 
         ], 
     },
     {
-        q: "question5",
+        q: "Wich of the following choices is NOT the proper way to write a 'while' loop:",
         a: "0",
         choices: [
-            "choice 1",
-            "choice 2",
-            "choice 3",
-            "choice 4" 
+            "while x=y return true;",
+            "var i = 3; while ( i ) alert( i-- );",
+            "while (i) { alert(i); i--;}",
+            "while (i < 10) { alert (i + 'sec'); i++};" 
         ], 
     },
 ]
@@ -88,7 +88,7 @@ var gameOver = function(){
 var timer = function(){
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
-        if (timeLeft === 0 || index === 5) {
+        if (timeLeft === 0 || index >= 4) {
           clearInterval(timeInterval);
         }  
         timeLeft--;   
@@ -107,22 +107,22 @@ var deleteSection = function(){
     }
 }
 var showQuestion = function(){
-    console.log(index);
+    console.log("index:",index);
     if (timeLeft > 0){
         questionEl.innerHTML =questionsArray[index].q;
-        for(var i=0; i< questionsArray[index].choices.length; i++){
+        for(var i=0; i < questionsArray[index].choices.length; i++){
             var answersChoicesList = document.createElement("li");
             answersChoicesList.className = "list-elemt";
             var answersChoicesInfo = document.createElement("div");
             answersChoicesInfo.innerHTML = "<button class='btn' id= " + i + " type='button'>" + questionsArray[index].choices[i] + "</button>";
             answersChoicesList.appendChild(answersChoicesInfo);
-            console.log(answersChoicesList);
+            console.log("array choices:",i);
             answerChoicesEl.appendChild(answersChoicesList);
         } 
+        answerChoicesEl.addEventListener("click", readAnswers);
     }else{
         gameOver();
-    }
-    index++;
+    }  
 }
 var displayAnswer = function(answer){
     answerEl.setAttribute("style", "border-top: 2px solid var(--secondary); font-size: 1.4rem;");
@@ -139,20 +139,27 @@ var readAnswers = function(event){
     if (timeLeft === 0){
         gameOver();
         timerEl.textContent = "Time: 0";
-    }
-    if(index === 5){
+    }else if (index >= 4){
         timerEl.textContent = "Time: "+ timeLeft; 
         gameOver(); 
     } else if (choice === questionsArray[index].a){
-            deleteSection();
-            showQuestion();
-            displayAnswer("Correct!");
-        } else {
-            timeLeft -=10;
-            deleteSection();
-            showQuestion();
-            displayAnswer("Wrong!");
-        };   
+        console.log(choice , questionsArray[index].a);
+        deleteSection();
+        showQuestion();
+        displayAnswer("Correct!");
+        console.log("Correct!", questionsArray[index].q);
+        console.log('event.target' , choice);
+        console.log('answer', questionsArray[index].a);
+    } else {
+        deleteSection();
+        showQuestion();
+        displayAnswer("Wrong!");
+        timeLeft -=10;
+        console.log("Wrong!", questionsArray[index].q);
+        console.log('event.target' , choice);
+        console.log('answer', questionsArray[index].a);
+    };   
+    index++;
 }
 var createScoreArray = function(st,num){
     var scoreList = document.createElement('ul');
@@ -202,6 +209,6 @@ var viewScores = function(event){
     }
 }
 startQuizEl.addEventListener("click", startQuiz);
-answerChoicesEl.addEventListener("click", readAnswers);
+//answerChoicesEl.addEventListener("click", readAnswers);
 sectionEl.addEventListener("submit", viewScores);
 scoreEl.addEventListener("click",viewScores);

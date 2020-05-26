@@ -16,7 +16,7 @@ A timed quiz on JavaScript fundamentals that stores high scores
 * After click on one of the choices is gonna move to the next question and is gonna present on the bottom of the page if was a correct or wrong answer.
 * For every wrong answer the time/score is gonna be subtracted by ten.
 
-<img src="/assets/images/screenshot-JavaScript-Quiz.PNG"/>
+<img src="../assets/images/displayCorrectOrWrong.PNG"/>
 
 ## Built With
 * HTML
